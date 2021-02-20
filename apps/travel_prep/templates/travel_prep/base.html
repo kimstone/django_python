@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <!-- META -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block page_meta_description %}ERROR - Meta Description{% endblock page_meta_description %}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom Bootstrap -->
+    <link rel="stylesheet" href="{% static 'travel_prep/css/custom-bootstrap.css' %}">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{% static 'travel_prep/css/travel_prep.css' %}">
+    <link rel="stylesheet" href="{% static 'css/project.css' %}">
+
+    <link rel="icon" type="image/x-icon" href="{% static 'travel_prep/img/favicon.ico' %}">
+
+    <!-- FONTS -->
+
+    <title>{% block title %}ERROR - Title{% endblock title %}</title>
+    
+</head>
+<body class='page'>
+{% include 'travel_prep/partials/nav_menu.html' %}
+{% include 'travel_prep/partials/header.html' %}
+<div id="page-container" class="container-fluid">
+    <div class="row">
+        {% block content %}
+            HTML TAG: BODY -- APPLICATION TEMPLATE ERROR
+        {% endblock content %}
+    </div>
+</div>
+{% include 'travel_prep/partials/footer.html' %}
+{% include 'travel_prep/partials/js_footer.html' %}
+</body>
+</html>
