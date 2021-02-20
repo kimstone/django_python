@@ -1,0 +1,9 @@
+#####################################################
+# PROJECT: dogos_ninjas
+# ref: https://git-scm.com/docs/gitignore
+#####################################################
+
+.env
+apps/__pycache__/
+config/__pycache__/
+db.sqlite3
