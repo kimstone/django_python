@@ -7,6 +7,14 @@ import re
 
 class UserManager(models.Manager):
 
+    def authenticate_credentials(self, email, password):
+        try:
+            user = User.objects.get(email=email)
+        except:
+            return False
+        return bcrypt.checkpw(password.encode(), user.password.encode())
+
+
     def validate_registration_form(self, data):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 

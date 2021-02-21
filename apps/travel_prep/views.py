@@ -6,16 +6,33 @@ from . models import User
 
 # Create your views here.
 
+def authenticate_user_view(request):
+
+    if request.method == "GET":
+        return redirect('/')
+
+    if not User.objects.authenticate_credentials(request.POST['email_add'], request.POST['password']):
+        messages.error(request, 'You have entered an invalid email/password combo')
+        return redirect('access_control/login_form')
+    else:
+        registered_user = User.objects.get(email=request.POST['email_add'])
+        request.session['user_id'] = registered_user.id
+        request.session['success_msg'] = "You have successfully logged in!"
+
+        if registered_user.user_level != 9:
+            return redirect('access_control/user_directory')
+        else:
+            return redirect('access_control/dashboard-admin')
+
+
+
 def index_view(request):
     context = {
         'page_title': "User Registration and Login",
         'page_meta_description': "SEO for User Registration & Login",
     }
-<<<<<<< HEAD
     context['welcome_msg'] = "Welcome to the."
     return render(request, 'travel_prep/index.html', context)
-=======
-    return render(request, 'travel_prep/index.html')
 
 
 
@@ -55,4 +72,4 @@ def show_information_view(request):
     obj = User.objects.get(id=request.session['user_id'])
     context['object'] = obj
     return render(request, 'travel_prep/message.html', context)
->>>>>>> wip-registration-t03
+
