@@ -31,7 +31,7 @@
                         <td>{{ trip.travel_end_date | date:"M dS Y" }}</td>
                         <td>{{ trip.plan}}</td>
                         <td>
-                            <a class="btn btn-danger btn-sm" href="/">Delete</a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'travel_prep/delete' trip.id %}">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -42,7 +42,7 @@
                         <td>{{ trip.travel_start_date | date:"M dS Y" }}</td>
                         <td>{{ trip.travel_end_date | date:"M dS Y" }}</td>
                         <td>{{ trip.plan}}</td>
-                        <td><a class="btn btn-secondary btn-sm" href="{% url 'travel_prep/cancel' trip.id %}">Cancel</a></td>
+                        <td><a class="btn btn-warning btn-sm" href="{% url 'travel_prep/cancel' trip.id %}">Cancel</a></td>
                     </tr>
                 {% endfor %}
             </table>

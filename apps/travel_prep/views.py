@@ -98,6 +98,23 @@ def create_user_view(request):
 
 
 
+def delete_trip_view(request, trip_id):
+
+    user = User.objects.get(id=request.session['user_id'])
+    this_trip = Trip.objects.get(id=trip_id)
+
+    # can only be deleted by trip planner
+    if this_trip.planner != user:
+        messages.error(request, "Trip can only be deleted by the planner who created it!")
+        return redirect('travel_prep/trips')
+
+    this_trip.delete()
+
+    return redirect('travel_prep/trips')
+
+
+
+
 def join_trip_view(request, trip_id):
     user = User.objects.get(id=request.session['user_id'])
     this_trip = Trip.objects.get(id=trip_id)
