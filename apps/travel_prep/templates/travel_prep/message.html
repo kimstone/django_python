@@ -1,0 +1,19 @@
+{% extends 'travel_prep/base.html' %}
+
+{% block meta_description %}{{ page_meta_description }}{% endblock meta_description %}
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row w-100 mx-auto m-5">
+        <div class="col text-center">
+            <h1>Hello, {{ object.first_name }}!</h1>
+            {% for message in messages %}
+                <h4 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

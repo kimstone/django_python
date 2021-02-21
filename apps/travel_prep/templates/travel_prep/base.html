@@ -28,13 +28,7 @@
 <body class='page'>
 {% include 'travel_prep/partials/nav_menu.html' %}
 {% include 'travel_prep/partials/header.html' %}
-<div id="page-container" class="container-fluid">
-    <div class="row">
-        {% block content %}
-            HTML TAG: BODY -- APPLICATION TEMPLATE ERROR
-        {% endblock content %}
-    </div>
-</div>
+{% block content %} HTML TAG: BODY -- APPLICATION TEMPLATE ERROR {% endblock content %}
 {% include 'travel_prep/partials/footer.html' %}
 {% include 'travel_prep/partials/js_footer.html' %}
 </body>
