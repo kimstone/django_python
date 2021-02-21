@@ -26,7 +26,7 @@
                 <tbody>
                 {% for trip in user_planned_trips  %}
                     <tr>
-                        <td>{{ trip.destination }}</td>
+                        <td><a href="{% url 'travel_prep/destination' trip.id %}">{{ trip.destination }}</a></td>
                         <td>{{ trip.travel_start_date | date:"M dS Y" }}</td>
                         <td>{{ trip.travel_end_date | date:"M dS Y" }}</td>
                         <td>{{ trip.plan}}</td>
@@ -38,7 +38,7 @@
                 </tbody>
                 {% for trip in user_joined_trips  %}
                     <tr>
-                        <td>{{ trip.destination }}</td>
+                        <td><a href="{% url 'travel_prep/destination' trip.id %}">{{ trip.destination }}</a></td>
                         <td>{{ trip.travel_start_date | date:"M dS Y" }}</td>
                         <td>{{ trip.travel_end_date | date:"M dS Y" }}</td>
                         <td>{{ trip.plan}}</td>
@@ -68,7 +68,7 @@
                 <tbody>
                 {% for other_trip in others_trips  %}
                     <tr>
-                        <td>{{ other_trip.destination }}</td>
+                        <td><a href="{% url 'travel_prep/destination' other_trip.id %}">{{ other_trip.destination }}</a></td>
                         <td>{{ other_trip.travel_start_date | date:"M dS Y" }}</td>
                         <td>{{ other_trip.travel_end_date | date:"M dS Y" }}</td>
                         <td>{{ other_trip.plan }}</td>

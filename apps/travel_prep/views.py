@@ -149,6 +149,16 @@ def show_db_objects_all_view(request):
 
 
 
+def show_destination_view(request, trip_id):
+    context = {
+        'page_title': "Show Destination Information",
+    }
+    this_trip = Trip.objects.get(id=trip_id)
+    context['trip'] = this_trip
+    return render(request, 'travel_prep/destination.html', context)
+
+
+
 def show_information_view(request):
     context = {
         'page_title': "Communication with User",
