@@ -11,5 +11,5 @@ def index_view(request):
         'page_title': "Page Title",
         'page_meta_description': "Page Meta Description",
     }
-    context['welcome_msg'] = "Welcome to the Sample Page."
+    context['welcome_msg'] = "Welcome to the."
     return render(request, 'travel_prep/index.html', context)
