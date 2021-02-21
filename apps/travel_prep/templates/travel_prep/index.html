@@ -53,18 +53,18 @@
             {% if messages %}
                 <ul class="messages">
                 {% for message in messages %}
-                    {% if 'login' in message.tags %}
+                    {% if 'login-form' in message.tags %}
                         <li class="{{ message.tags }}">{{ message }}</li>
                     {% endif %}
                 {% endfor %}
                 </ul>
             {% endif %}
 
-            <form action="{% url 'travel_prep/authenticate' %}" id="login-form" name="login-form" method="POST">
+            <form action="{% url 'travel_prep/login' %}" id="login-form" name="login-form" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label class="my-2" for="email_add">Email Address</label>
-                    <input type="email" class="form-control" id="email_add" name="email_add" placeholder="Enter Your Best Email">
+                    <label class="my-2" for="email_address">Email Address</label>
+                    <input type="email" class="form-control" id="email_address" name="email_address" placeholder="Enter Your Best Email">
                 </div>
                 <div class="form-group">
                     <label for="password" class="my-2">Password</label>

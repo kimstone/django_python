@@ -1,0 +1,23 @@
+{% extends 'travel_prep/base.html' %}
+
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if 'model-user' in message.tags %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+                <!-- DISPLAY MODEL User Data -->
+                {% for user in User.objects.all %}
+                    <p>{{ user.first_name }}</p>
+                {% endfor %}
+            {% else %}
+                <h5>YOU FAILED TO REQUEST DATA</h5>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+</div>
+{% endblock content %}

@@ -11,18 +11,16 @@ def authenticate_user_view(request):
     if request.method == "GET":
         return redirect('/')
 
-    if not User.objects.authenticate_credentials(request.POST['email_add'], request.POST['password']):
+    if not User.objects.authenticate_credentials(request.POST['email_address'], request.POST['password']):
         messages.error(request, 'You have entered an invalid email/password combo')
-        return redirect('access_control/login_form')
+        return redirect('travel_prep/message')
     else:
-        registered_user = User.objects.get(email=request.POST['email_add'])
+        registered_user = User.objects.get(email=request.POST['email_address'])
         request.session['user_id'] = registered_user.id
-        request.session['success_msg'] = "You have successfully logged in!"
 
-        if registered_user.user_level != 9:
-            return redirect('access_control/user_directory')
-        else:
-            return redirect('access_control/dashboard-admin')
+        messages.success(request, 'The User model listing ...', extra_tags='model-user')
+        #context['users'] = User.objects.all()
+        return redirect('travel_prep/db_object_listing')
 
 
 
@@ -54,7 +52,7 @@ def create_user_view(request):
         new_user = User.objects.create_new_user(request.POST)
         request.session['user_id'] = new_user.id
         messages.success(request, "You have successfully registered!")
-        return redirect('travel_prep/information')
+        return redirect('travel_prep/message')
 
 
 
@@ -64,12 +62,37 @@ def logout(request):
 
 
 
+def show_db_objects_view(request):
+    context = {
+        'page_title': "Display DB Objects to Developer",
+    }
+    #obj = User.objects.get(id=request.session['user_id'])
+    #context['object'] = obj
+    return render(request, 'travel_prep/db_objects.html', context)
+
+
+
+def show_db_objects_all_view(request):
+    context = {
+        'page_title': "Show All DB Objects",
+    }
+    context['users'] = User.objects.all()
+    return render(request, 'travel_prep/db_objects_all.html', context)
+
+
+
 def show_information_view(request):
     context = {
         'page_title': "Communication with User",
         'page_meta_description': "SEO for Communication with User",
     }
-    obj = User.objects.get(id=request.session['user_id'])
-    context['object'] = obj
+
+    if 'user_id' not in request.session:
+        greeting = 'Please Login'
+    else:
+        obj = User.objects.get(id=request.session['user_id'])
+        greeting = f"Hello, {obj.first_name}"
+
+    context['greeting'] = greeting
     return render(request, 'travel_prep/message.html', context)
 

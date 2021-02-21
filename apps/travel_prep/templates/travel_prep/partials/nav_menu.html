@@ -7,19 +7,25 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'travel_prep/register' %}">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'travel_prep/logout' %}">Logout</a>
-        </li>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'travel_prep/register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'travel_prep/db_object_all_listing' %}">Show DB</a>
+            </li>
+            {% if 'user_id' not in request.session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'travel_prep/login' %}">Login</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'travel_prep/logout' %}">Logout</a>
+                </li>
+            {% endif %}
         <!--
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
