@@ -4,18 +4,76 @@
 {% block title %}{{ page_title }}{% endblock title %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
 
     <div class="row w-100 mx-auto m-5">
-        <div class="col"><h2 class="text-center">{{ welcome_msg }}</h2></div>
-    </div>
+        <div class="col px-4 mx-5">
+            <h3>Registration</h3>
 
-    <div class="row w-100 mx-auto m-5">
-        <div class="col">
-            Column #1
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    {% if 'registration-form' in message.tags %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form action="{% url 'travel_prep/register' %}" id="registration-form" name="registration-form" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="first_name" class="form-label my-2">First Name</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                </div>
+                <div class="mb-3">
+                    <label for="last_name" class="form-label my-2">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <label class="my-2" for="email_address">Email address</label>
+                    <input type="email" class="form-control" id="email_address" name="email_address" placeholder="Enter Your Best Email">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="my-2">Password</label>
+                    <input type="password" class="form-control" id="password"  name="password" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="pw_confirm" class="my-2">Confirm Password</label>
+                    <input type="password" class="form-control" id="pw_confirm"  name="pw_confirm" placeholder="">
+                </div>
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary btn-sm px-4 my-3">Register</button>
+                </div>
+            </form>
+
         </div>
-        <div class="col">
-            Column #2
+        <div class="col px-4 mx-5">
+            <h3>Login</h3>
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    {% if 'login' in message.tags %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form action="{% url 'travel_prep/authenticate' %}" id="login-form" name="login-form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="my-2" for="email_add">Email Address</label>
+                    <input type="email" class="form-control" id="email_add" name="email_add" placeholder="Enter Your Best Email">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="my-2">Password</label>
+                    <input type="password" class="form-control" id="password"  name="password" placeholder="">
+                </div>
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary btn-sm px-4 my-3">Login</button>
+                </div>
+            </form>
         </div>
     </div>
 
