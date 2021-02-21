@@ -1,0 +1,84 @@
+{% extends 'travel_prep/base.html' %}
+
+{% block meta_description %}{{ page_meta_description }}{% endblock meta_description %}
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row w-100 mx-auto m-5">
+        <div class="col"><h2 class="text-start">Hello, {{ user.first_name }}!</h2></div>
+    </div>
+
+    <div class="row w-100 mx-auto m-5">
+        <div class="col">
+            <h3 class="text-start">Logged Users Travel Plans [Created & Joined]</h3>
+            <table class="table table-bordered border-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Start Travel</th>
+                        <th scope="col">End Travel</th>
+                        <th scope="col">The Plan</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for trip in user_planned_trips  %}
+                    <tr>
+                        <td>{{ trip.destination }}</td>
+                        <td>{{ trip.travel_start_date | date:"M dS Y" }}</td>
+                        <td>{{ trip.travel_end_date | date:"M dS Y" }}</td>
+                        <td>{{ trip.plan}}</td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" href="/">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                {% for trip in user_joined_trips  %}
+                    <tr>
+                        <td>{{ trip.destination }}</td>
+                        <td>{{ trip.travel_start_date | date:"M dS Y" }}</td>
+                        <td>{{ trip.travel_end_date | date:"M dS Y" }}</td>
+                        <td>{{ trip.plan}}</td>
+                        <td><a class="btn btn-secondary btn-sm" href="{% url 'travel_prep/cancel' trip.id %}">Cancel</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% if 'user_id' in request.session %}
+            <p class="text-start"><a class="btn btn-primary btn-lg" href="{% url 'travel_prep/add-trip' %}">Add a Trip</a></p>
+        {% endif %}
+    </div>
+
+    <div class="row w-100 mx-auto m-5">
+        <div class="col">
+            <h3 class="text-start">Other Travelors Scheduled Trips</h3>
+            <table class="table table-striped table-bordered border-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Start Travel</th>
+                        <th scope="col">End Travel</th>
+                        <th scope="col">The Plan</th>
+                        <th scope="col">Invite Yourself</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for other_trip in others_trips  %}
+                    <tr>
+                        <td>{{ other_trip.destination }}</td>
+                        <td>{{ other_trip.travel_start_date | date:"M dS Y" }}</td>
+                        <td>{{ other_trip.travel_end_date | date:"M dS Y" }}</td>
+                        <td>{{ other_trip.plan }}</td>
+                        <td><a href="{% url 'travel_prep/join' other_trip.id %}">Join</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

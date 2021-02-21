@@ -35,5 +35,36 @@
         </div>
     </div>
 
+
+    <div class="row w-100 mx-auto m-5">
+        <div class="col">
+            <h3 class="text-start">Trip Model</h3>
+            <table class="table table-striped table-bordered border-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Plan</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                        <th scope="col">Planner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for trip in trips  %}
+                    <tr>
+                        <td>{{ trip.id }}</td>
+                        <td>{{ trip.destination }}</td>
+                        <td>{{ trip.plan }}</td>
+                        <td>{{ trip.trave_start_date | date:"M dS Y P" }}</td>
+                        <td>{{ trip.trave_end_date | date:"M dS Y P" }}</td>
+                        <td>{{ trip.planner }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 {% endblock content %}

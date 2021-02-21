@@ -14,9 +14,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'travel_prep/register' %}">Register</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'travel_prep/db_object_all_listing' %}">Show DB</a>
-            </li>
+            {% if 'user_id' in request.session %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'travel_prep/trips' %}">My Trips</a>
+                </li>
+            {% endif %}
             {% if 'user_id' not in request.session %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'travel_prep/login' %}">Login</a>
@@ -26,6 +28,9 @@
                     <a class="nav-link" href="{% url 'travel_prep/logout' %}">Logout</a>
                 </li>
             {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'travel_prep/db_object_all_listing' %}">Show DB</a>
+            </li>
         <!--
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -1,0 +1,48 @@
+{% extends 'travel_prep/base.html' %}
+
+{% block meta_description %}{{ page_meta_description }}{% endblock meta_description %}
+{% block title %}{{ page_title }}{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row w-100 mx-auto m-5">
+        <div class="col px-4 mx-5">
+            <h2>Add a Trip</h2>
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    {% if 'trip-form' in message.tags %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form action="{% url 'travel_prep/add-trip' %}" id="trip-form" name="trip-form" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="destination" class="form-label my-2">Destination</label>
+                    <input type="text" class="form-control" id="destination" name="destination" placeholder="Your Destination">
+                </div>
+                <div class="mb-3">
+                    <label for="plan" class="form-label my-2">Your Plans</label>
+                    <textarea class="form-control" id="plan" name="plan" rows="3" placeholder="What's the purpose for your trip? Describe your travel plans."></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="start-date" class="form-label my-2">Start Travel On:</label>
+                    <input type="date" class="form-control" id="start-date" name="start-date">
+                </div>
+                <div class="mb-3">
+                    <label for="end-date" class="form-label my-2">End Travel On:</label>
+                    <input type="date" class="form-control" id="end-date" name="end-date">
+                </div>
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary btn-sm px-4 my-3">Add Your Trip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

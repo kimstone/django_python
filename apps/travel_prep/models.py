@@ -15,6 +15,19 @@ class UserManager(models.Manager):
         return bcrypt.checkpw(password.encode(), user.password.encode())
 
 
+    def validate_login_form(self, data):
+
+        errors = {}
+
+        if len(data['email_address']) < 1:
+            errors['email_address'] = "Email Address cannot be empty."
+
+        if len(data['password']) < 1:
+            errors['password'] = "Password cannot be empty."
+
+        return errors
+
+
     def validate_registration_form(self, data):
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -73,3 +86,55 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
+
+
+
+class TripManager(models.Manager):
+
+    def validate_trip_form(self, data):
+
+        errors = {}
+
+        if len(data['destination']) < 1:
+            errors['destination'] = "Destination cannot be empty."
+
+        if len(data['plan']) < 1:
+            errors['plan'] = "Please enter your plans."
+
+        if len(data['start-date']) < 1:
+            errors['start-date'] = "Enter a start date."
+
+        if len(data['end-date']) < 1:
+            errors['end-date'] = "Enter an end date."
+
+        return errors
+
+
+    def create_new_trip(self, data, planner):
+        return self.create(
+            destination=data['destination'],
+            plan=data['plan'],
+            travel_start_date=data['start-date'],
+            travel_end_date=data['end-date'],
+            planner=planner,
+        )
+
+
+class Trip(models.Model):
+    destination = models.CharField(max_length=100)
+    plan = models.TextField()
+    travel_start_date = models.DateField()
+    travel_end_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    planner = models.ForeignKey(
+        User,
+        related_name="trip_planner",
+        on_delete=models.CASCADE,
+    )
+    travelers = models.ManyToManyField(
+        User,
+        related_name="trip_travelers",
+    )
+
+    objects = TripManager()
