@@ -155,6 +155,9 @@ def show_destination_view(request, trip_id):
     }
     this_trip = Trip.objects.get(id=trip_id)
     context['trip'] = this_trip
+
+    travelers = User.objects.filter(trip_travelers=id)
+    context['travelers'] = travelers
     return render(request, 'travel_prep/destination.html', context)
 
 

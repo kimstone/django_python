@@ -58,6 +58,7 @@
             <table class="table table-striped table-bordered border-dark">
                 <thead>
                     <tr>
+                        <th scope="col">Planner</th>
                         <th scope="col">Destination</th>
                         <th scope="col">Start Travel</th>
                         <th scope="col">End Travel</th>
@@ -68,6 +69,7 @@
                 <tbody>
                 {% for other_trip in others_trips  %}
                     <tr>
+                        <td>{{ other_trip.planner }}</td>
                         <td><a href="{% url 'travel_prep/destination' other_trip.id %}">{{ other_trip.destination }}</a></td>
                         <td>{{ other_trip.travel_start_date | date:"M dS Y" }}</td>
                         <td>{{ other_trip.travel_end_date | date:"M dS Y" }}</td>

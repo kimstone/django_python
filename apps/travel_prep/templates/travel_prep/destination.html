@@ -6,16 +6,33 @@
 <div class="container-fluid">
 
     <div class="row w-100 mx-auto m-5">
-        <div class="col"><h2 class="text-center">{{ page_title }}</h2></div>
+        <div class="col"><b class="text-muted text-center">Destination Details</b></div>
+    </div>
+
+    <div class="row w-100">
+        <div class="col"><h2 class="py-2 text-start">Trip Travel Details</h2></div>
+    </div>
+
+    <div class="row w-100 mx-auto mx-5">
+        <div class="col">
+            <p><b>Trip Destination: </b> {{ trip.destination }} </p>
+            <p><b>Planned By: </b> {{ trip.planner }} </p>
+            <p><b>Start Date: </b> {{ trip.travel_start_date }} </p>
+            <p><b>End Date: </b> {{ trip.travel_start_date }} </p>
+        </div>
+    </div>
+
+    <div class="row w-100 mx-auto mx-5">
+        <div class="col">
+            <b>Trip Summary</b><br>
+            <p class="px-5 py-2">{{ trip.plan }}</p>
+        </div>
     </div>
 
     <div class="row w-100 mx-auto m-5">
-        <div class="col">
-            Column #1
-        </div>
-        <div class="col">
-            Column #2
-        </div>
+    {% if 'user_id' in request.session %}
+        <p class="text-start"><a class="btn btn-primary" href="{% url 'travel_prep/add-trip' %}">Add New Travel Plans</a></p>
+    {% endif %}
     </div>
 
 </div>
